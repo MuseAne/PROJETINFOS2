@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fr.insa.sth1.b7.projet_info_s2;
 
 import fr.insa.sth1.b7.projet_info_s2.gui.GlobalPane;
@@ -18,10 +13,6 @@ import java.util.TreeMap;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-/**
- *
- * @author theob
- */
 public class ClassDessin { //Cette classe porte en fait mal son nom, de base, elle a été faite juste pour nous depanner de quelques problèmes, mais au fur et a mesure du temps, on s'est rendu compte qu'elle était essentielle dans la liaison entre l'interface graphique et les class de traitement de données pour calculer le treillis
 
     private ArrayList<Figure> Contenu;
@@ -32,7 +23,7 @@ public class ClassDessin { //Cette classe porte en fait mal son nom, de base, el
 
     public ClassDessin() {
         Contenu = new ArrayList<>();
-        //Contenu = Figure.GenerationListFigure();
+
     }
 
     public ArrayList<Figure> getContenu() {
@@ -131,12 +122,12 @@ public class ClassDessin { //Cette classe porte en fait mal son nom, de base, el
             }
         }
     }
-    
-    public String toString(){
+
+    public String toString() {
         String res = "";
         for (Figure F : Contenu) {
             res = res + F.toString();
-            
+
         }
         return res;
     }
@@ -273,7 +264,7 @@ public class ClassDessin { //Cette classe porte en fait mal son nom, de base, el
                 throw new Error("Le fichier ne peut pas être sauvegardé, il faut au moins un segement");
             }
             bw.append(AS.get(0).getZoneConstructible().Enregistrement()); //La, on enregistre d'abord la zone constructible
-            //bw.append(AN.get(0).getTreillis_Noeud().E)
+
             for (Force F : AF) {
                 bw.append(F.Enregistrement());
             }
@@ -292,12 +283,12 @@ public class ClassDessin { //Cette classe porte en fait mal son nom, de base, el
             for (Barre B : AB) {
                 bw.append(B.Enregistrement());
             }
-            //bw.append("Cout : ")
+
             bw.write("FIN");
             bw.close();
         }
     }
-    
+
     public void Enregistrement(File file, GlobalPane GP) throws IOException {
         //D'abord, on créer toutes les arraylistes des différentes figures
         ArrayList<Noeud> AN = Tri_Des_Noeuds();
@@ -313,7 +304,7 @@ public class ClassDessin { //Cette classe porte en fait mal son nom, de base, el
                 throw new Error("Le fichier ne peut pas être sauvegardé, il faut au moins un segement");
             }
             bw.append(AS.get(0).getZoneConstructible().Enregistrement()); //La, on enregistre d'abord la zone constructible
-            //bw.append(AN.get(0).getTreillis_Noeud().E)
+
             for (Force F : AF) {
                 bw.append(F.Enregistrement());
             }
@@ -332,7 +323,7 @@ public class ClassDessin { //Cette classe porte en fait mal son nom, de base, el
             for (Barre B : AB) {
                 bw.append(B.Enregistrement());
             }
-            bw.append("Cout ; "+ GP.getCout() + "\n");
+            bw.append("Cout ; " + GP.getCout() + "\n");
             bw.write("FIN");
             bw.close();
         }
@@ -363,10 +354,7 @@ public class ClassDessin { //Cette classe porte en fait mal son nom, de base, el
                     System.out.println("Contient[" + i + "] " + Contient[i]);;
 
                 }
-//                for (int i = 1; i < Contient.length; i++) {
-//                    System.out.println("Contient["+i+"] "+(int) Double.parseDouble(Contient[i]));
-//                    
-//                }
+
                 switch (Contient[0]) {
                     case "ZoneConstructible ":
                         ZoneConstructible ZC = new ZoneConstructible((int) Double.parseDouble(Contient[1]), (int) Double.parseDouble(Contient[2]), (int) Double.parseDouble(Contient[3]), (int) Double.parseDouble(Contient[4]));
@@ -444,32 +432,17 @@ public class ClassDessin { //Cette classe porte en fait mal son nom, de base, el
             double Val = M.get(i, 0); //On obteint la valeur de l'effort correspondant à la bonne barre
             AB.add(B.isBroken(Val));//On rentre dans la liste, la valeur obtenu avec la méthode isBroken
         }
-        //return AB;
     }
-    
-    public void Remove(Figure F){
+
+    public void Remove(Figure F) {
         Contenu.remove(F);
-        /*
-        if (F instanceof Barre){
-            Barre B = (Barre) F;
-            for(int i = 0; i < 2 ; i++){
-                B.getNoeuds_Barre(i).removeBarre(B);
-            }
-        } else if (F instanceof Segment){
-            Segment S = (Segment) F;
-            for(int i = 0; i < 2; i++){
-                S.getExtremite(i).removeSegment(S);
-            }
-        }
-*/
-        //TODO Il faut remove tous les elements qui sont en relation par exemple quand on elève une barre, il faut aussi l'elever des listes de barrs des ses extremités
     }
-    
-    public Remonte_Inversion Simulation(){
+
+    public Remonte_Inversion Simulation() {
         Remonte_Inversion RI = new Remonte_Inversion();
         Remonte_Inversion RI1 = Resolution_ClassDessin(); //Si c'est faisable, on résoud
         RI.setPossible(RI1.getPossible());//J'aurais pu directement mettre true, mais je prefère faire ca come ca, on ne sait jamais, si jamais ca a réussi à rentre dans la boucle mais que ce n'est pas résolvable, c'est cohérant, sinon, on peut avoir true et en même temps, la matrice qui vaut null donc bon...
-        if(this.isIsostatic() == false || RI.getPossible() == false){ //On teste si c'est isostatic ou pas
+        if (this.isIsostatic() == false || RI.getPossible() == false) { //On teste si c'est isostatic ou pas
             return RI; //Note : on a pas besoin de le mettre à false parce que le constructeur vide met par defaut la matrice à null et le Possible à false
         } else {
             System.out.println("ICIIIIII");
@@ -479,7 +452,6 @@ public class ClassDessin { //Cette classe porte en fait mal son nom, de base, el
             return RI;
         }
     }
-
 
     public boolean isIsostatic() { //Cette classe permet de savoir si le calcul de treillis est possible ou pas
         boolean B;
@@ -495,7 +467,7 @@ public class ClassDessin { //Cette classe porte en fait mal son nom, de base, el
                 AAS.add((Appui_Simple) N);
             }
         }
-        if (2 * AN.size() == AB.size() + 2*AAS.size() + 1 * AAD.size()) { //On teste si cela répond à la formule du polycopié
+        if (2 * AN.size() == AB.size() + 2 * AAS.size() + 1 * AAD.size()) { //On teste si cela répond à la formule du polycopié
             B = true;
         } else {
             B = false;
@@ -513,20 +485,20 @@ public class ClassDessin { //Cette classe porte en fait mal son nom, de base, el
         } else if (F instanceof Noeud) {
             ArrayList<Noeud> AN = Tri_Des_Noeuds();
             for (Noeud N : AN) {
-                
+
                 N.MAJ_Identifiacteurs(Id);
             }
 
         } else if (F instanceof Point) {
             ArrayList<Point> AP = Tri_Des_Point();
             for (Point P : AP) {
-                
+
                 P.MAJ_Identifiacteurs(Id);
             }
         } else if (F instanceof Segment) {
             ArrayList<Segment> AS = Tri_Des_Segment();
             for (Segment S : AS) {
-                
+
                 S.MAJ_Identifiacteurs(Id);
             }
         }

@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fr.insa.sth1.b7.projet_info_s2;
 
 import javafx.scene.paint.Color;
 
-/**
- *
- * @author theob
- */
 public abstract class Appui extends Noeud {
 
     private double alpha; //Alpha est pris en comptea partir de la première extremité du segment SegApui, à savoir SegAppui.getExtremite(0)
@@ -25,7 +16,7 @@ public abstract class Appui extends Noeud {
         SegAppui = Seg;
         Seg.addAppuui(this);
     }
-    
+
     public Appui(Treillis T, int Iden, double coeff, Segment Seg, Force FN, Color Couleur) {
         super(T, Iden, FN, Couleur);
         if (coeff > 1 || coeff < 0) {
@@ -35,7 +26,7 @@ public abstract class Appui extends Noeud {
         SegAppui = Seg;
         Seg.addAppuui(this);
     }
-    
+
     public Appui(Treillis T, int Iden, double coeff, Segment Seg, Force FN, double r, double g, double b) {
         super(T, Iden, FN);
         if (coeff > 1 || coeff < 0) {
@@ -56,7 +47,7 @@ public abstract class Appui extends Noeud {
         SegAppui = Seg;
         Seg.addAppuui(this);
     }
-    
+
     public Appui(int Id, double coeff, Segment Seg, Color C) {
         super(Id, C);
         if (coeff > 1 || coeff < 0) {
@@ -72,7 +63,7 @@ public abstract class Appui extends Noeud {
         res = "\nCoefficient alpha : " + alpha + "\nSegment : " + SegAppui.getId();
         return res;
     }
-    
+
     @Override
     public int getId() {
         return super.getId();
@@ -85,20 +76,18 @@ public abstract class Appui extends Noeud {
     public double getAlpha() {
         return alpha;
     }
-    
-    
 
     public Point getPos() { //On renvoit le point où se trouve l'appui et comme ca, on aura ses coordonées et se sera plus simple pour le claul d'angle
         Point P;
         if (SegAppui.getExtremite(0).getAbscisse() == SegAppui.getExtremite(1).getAbscisse()) { //Ici, on prend en compte le cas particulier de si les deux points ont la même abcsisse, auquel cas, on ne peut pas faire l'équation de la droite et tout et tout 
             double x = SegAppui.getExtremite(0).getAbscisse();
-            double y = SegAppui.LongueurSegment()*alpha;
+            double y = SegAppui.LongueurSegment() * alpha;
             //Enusite on met y au bon endroit : Soit on fait extremité(0) + y soit extremité(0) - y, tout va dépendre de la position de extremité(0) par rapport à extremité(1), il faut juste qu'à la fin, y se trouve entre extremité(0) et extremité(1)
-            if(SegAppui.getExtremite(0).getOrdonnee() > SegAppui.getExtremite(1).getOrdonnee()){
-                y = SegAppui.getExtremite(0).getOrdonnee()-y; //Si l'extremité(0) est plus haute que l'extremité(1) alors on fait - y
-            } else if(SegAppui.getExtremite(0).getOrdonnee() < SegAppui.getExtremite(1).getOrdonnee()){
-                y = SegAppui.getExtremite(0).getOrdonnee()+y; //Si l'extremité(0) est plus basse que l'extremité(1) alors on fait + y
-            } else{ //Dans le dernier cas, alors les deux extremité sont aux même coordonées, donc y est égale à leur coordonées
+            if (SegAppui.getExtremite(0).getOrdonnee() > SegAppui.getExtremite(1).getOrdonnee()) {
+                y = SegAppui.getExtremite(0).getOrdonnee() - y; //Si l'extremité(0) est plus haute que l'extremité(1) alors on fait - y
+            } else if (SegAppui.getExtremite(0).getOrdonnee() < SegAppui.getExtremite(1).getOrdonnee()) {
+                y = SegAppui.getExtremite(0).getOrdonnee() + y; //Si l'extremité(0) est plus basse que l'extremité(1) alors on fait + y
+            } else { //Dans le dernier cas, alors les deux extremité sont aux même coordonées, donc y est égale à leur coordonées
                 y = SegAppui.getExtremite(0).getOrdonnee();
             }
             P = new Point(x, y);
@@ -131,17 +120,7 @@ public abstract class Appui extends Noeud {
             y = m * x + p; //Comme le point appartient au segement, on peut trouver y avec l'équation de la droite
             P = new Point(x, y);
         }
-        
+
         return P;
     }
-    
-    
-    
-    
-    
-    /*public double getAlphaNoeud(Point P, Segment S){
-        TODO
-    }
-*/
-
 }

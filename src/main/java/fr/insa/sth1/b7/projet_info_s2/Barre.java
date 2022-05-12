@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fr.insa.sth1.b7.projet_info_s2;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-/**
- *
- * @author theob
- */
 public class Barre extends Figure {
 
     private int Id;
@@ -51,7 +42,7 @@ public class Barre extends Figure {
         N2.addBarre(this);
         T.addBarre_Treillis(this);
     }
-                                                                                // TO DO : FAIRE UN CONSTRUCTEUR AVEC ID, N1, N2 ET COULEUR
+
     public Barre(int Iden, Noeud N1, Noeud N2) {
         Id = Iden;
         Noeuds_Barre = new Noeud[2];
@@ -61,7 +52,7 @@ public class Barre extends Figure {
         N2.addBarre(this);
         Type_de_Barre = new TypeBarre(0);
     }
-    
+
     public Barre(int Iden, Noeud N1, Noeud N2, Color C) {
         super(C);
         Id = Iden;
@@ -72,7 +63,7 @@ public class Barre extends Figure {
         N2.addBarre(this);
         Type_de_Barre = new TypeBarre(0);
     }
-    
+
     public Barre(int Iden, Noeud N1, Noeud N2, TypeBarre TB, Color C) {
         super(C);
         Id = Iden;
@@ -98,23 +89,16 @@ public class Barre extends Figure {
         return res;
     }
 
-    /**
-     * @return the Id
-     */
     @Override
     public int getId() {
         return Id;
     }
 
-
-    /**
-     * @return the Noeuds_Barre
-     */
     public Noeud[] getNoeuds_Barre() {
         return Noeuds_Barre;
     }
-    
-    public void setEffort(Matrice M){
+
+    public void setEffort(Matrice M) {
         Effort = M.get(Id, 0);
     }
 
@@ -122,16 +106,10 @@ public class Barre extends Figure {
         return Noeuds_Barre[i];
     }
 
-    /**
-     * @return the Treillis_Barre
-     */
     public Treillis getTreillis_Barre() {
         return Treillis_Barre;
     }
 
-    /**
-     * @return the Type_de_Barre
-     */
     public TypeBarre getType_de_Barre() {
         return Type_de_Barre;
     }
@@ -179,19 +157,19 @@ public class Barre extends Figure {
     public String Enregistrement() {
         String S;
         double Coul[] = super.getColorTab();
-        S = "Barre ; "+Id+ " ; " + Treillis_Barre.getId()+ " ; "+Type_de_Barre.getId()+" ; "+Noeuds_Barre[0].getId()+" ; "+Noeuds_Barre[1].getId()+" ; "+Coul[0]+" ; " + Coul[1] + " ; " +Coul[2] + "\n";
+        S = "Barre ; " + Id + " ; " + Treillis_Barre.getId() + " ; " + Type_de_Barre.getId() + " ; " + Noeuds_Barre[0].getId() + " ; " + Noeuds_Barre[1].getId() + " ; " + Coul[0] + " ; " + Coul[1] + " ; " + Coul[2] + "\n";
         return S;
     }
 
-    public double getEffort(Matrice M){
+    public double getEffort(Matrice M) {
         return M.get(Id, 0);
     }
-    
-    public double getEffort(){
+
+    public double getEffort() {
         return Effort;
     }
-    
-    public boolean isBroken(Matrice M){
+
+    public boolean isBroken(Matrice M) {
         if (Type_de_Barre.getRmC() > getEffort(M) || Type_de_Barre.getRmT() < getEffort(M)) {
             super.setColor(Color.RED);
             return true;
@@ -200,11 +178,11 @@ public class Barre extends Figure {
             return false;
         }
     }
-    
-    public boolean isBroken(double val){
-        System.out.println("Valeur " +val);
-        System.out.println("Valeur RmT " +Type_de_Barre.getRmT());
-        System.out.println("Valeur RmC " +Type_de_Barre.getRmC());
+
+    public boolean isBroken(double val) {
+        System.out.println("Valeur " + val);
+        System.out.println("Valeur RmT " + Type_de_Barre.getRmT());
+        System.out.println("Valeur RmC " + Type_de_Barre.getRmC());
         if (Type_de_Barre.getRmT() < val || Type_de_Barre.getRmC() > val) {
             System.out.println("Okay, je passe par là");
             super.setColor(Color.RED);
@@ -224,11 +202,11 @@ public class Barre extends Figure {
     public void setId(int Id) {
         this.Id = Id;
     }
-    
-    public double  getCout(){
+
+    public double getCout() {
         double C = 0;
         double dist = Noeuds_Barre[0].getDistance(Noeuds_Barre[1].getPos()); //Là on obtient la longeur de la barre
-        C = dist*Type_de_Barre.getCout()+ ((int) dist)*Type_de_Barre.getCout_Supplementaire();
+        C = dist * Type_de_Barre.getCout() + ((int) dist) * Type_de_Barre.getCout_Supplementaire();
         return C;
     }
 }
