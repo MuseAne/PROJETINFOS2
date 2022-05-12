@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fr.insa.sth1.b7.projet_info_s2;
 
 import java.util.ArrayList;
 import javafx.scene.paint.Color;
 
-/**
- *
- * @author theob
- */
 public abstract class Noeud extends Figure {
 
     private int Id;
@@ -27,14 +18,14 @@ public abstract class Noeud extends Figure {
         T.addNoeuds_Treillis(this);
         ForceNoeud = FN;
     }
-    
+
     public Noeud(int Iden, Color Couleur) {
         super(Couleur);
         Id = Iden;
         Barres_Noeud = new ArrayList<>();
         ForceNoeud = new Force();
     }
-    
+
     public Noeud(Treillis T, int Iden, Force FN) {
         this(T, Iden, FN, Color.BLACK); //Si l'on ne donne pas de couleur, elle est par défaut Noir
     }
@@ -54,7 +45,7 @@ public abstract class Noeud extends Figure {
 
     public String toString() {
         String res;
-        res = "\n --Noeud " + Id + "--" +"\nRelie les barres : ";
+        res = "\n --Noeud " + Id + "--" + "\nRelie les barres : ";
         for (int i = 0; i < Barres_Noeud.size(); i++) {
             res = res + "\n-> " + Barres_Noeud.get(i).getId();
 
@@ -73,8 +64,8 @@ public abstract class Noeud extends Figure {
     public Treillis getTreillis_Noeud() {
         return Treillis_Noeud;
     }
-    
-    public ArrayList<Barre> getBarre(){
+
+    public ArrayList<Barre> getBarre() {
         return Barres_Noeud;
     }
 
@@ -146,24 +137,16 @@ public abstract class Noeud extends Figure {
     public void setId(int Id) {
         this.Id = Id;
     }
-    
-    public void removeBarre(Barre B){
-        //if(Barres_Noeud.contains(B)){
-            Barres_Noeud.remove(B);
-        /*} else if(Barres_Noeud.isEmpty()){
-            throw new Error ("Problème, La liste de noeud était vide");
-        } else{
-            throw new Error ("Problème, la barre n'appartenait pas au noeud");
-        }
-*/
-        
+
+    public void removeBarre(Barre B) {
+
+        Barres_Noeud.remove(B);
+
     }
 
     public void setForceNoeud(Force ForceNoeud) {
         this.ForceNoeud = ForceNoeud;
     }
-    
-    
 
 }
 

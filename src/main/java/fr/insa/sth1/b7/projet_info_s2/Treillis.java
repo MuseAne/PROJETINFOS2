@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fr.insa.sth1.b7.projet_info_s2;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author theob
- */
 public class Treillis {
 
     private ArrayList<Barre> Barre_Treillis;
@@ -22,23 +13,23 @@ public class Treillis {
         Barre_Treillis = new ArrayList<>();
         Noeuds_Treillis = new ArrayList<>();
         ZC.setTreillisZoneConstructible(this);
-        
+
     }
-    
+
     public Treillis(int Iden, ArrayList<Noeud> AN, ArrayList<Barre> AB) {
         Id = Iden;
         Barre_Treillis = AB;
         Noeuds_Treillis = AN;
-        
+
     }
-    
-    public Treillis(){
+
+    public Treillis() {
         Id = 0;
         Barre_Treillis = new ArrayList<>();
         Noeuds_Treillis = new ArrayList<>();
     }
-    
-    public void setTreillis(ClassDessin CD){
+
+    public void setTreillis(ClassDessin CD) {
         ArrayList<Noeud> AN = CD.Tri_Des_Noeuds();
         ArrayList<Barre> AB = CD.Tri_Des_Barres();
         Barre_Treillis = AB;
@@ -89,14 +80,11 @@ public class Treillis {
     public int getId() {
         return Id;
     }
-    
-    public String Enregistrement(){
+
+    public String Enregistrement() {
         String res;
-        res = "Treillis ; "+this.getId();
+        res = "Treillis ; " + this.getId();
         return res;
     }
-    
-    
-    
 
 }

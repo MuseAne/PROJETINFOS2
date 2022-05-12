@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fr.insa.sth1.b7.projet_info_s2;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- *
- * @author theob
- */
 public class Test_ensemble {
 
 //    public static void Test_definition_classes() {
@@ -112,7 +103,7 @@ public class Test_ensemble {
 //        }
 //    }
 //    
-    public static void Affichage(ArrayList<Point> AP, ArrayList<Segment[]> AS, ArrayList<TriangleTerrain> ATT, ArrayList<Barre> AB, ArrayList<Noeud_Simple> ANS, ArrayList<Appui_Simple> AAS, ArrayList<Appui_Double> AAD, ArrayList<Treillis> AT, ZoneConstructible ZC){
+    public static void Affichage(ArrayList<Point> AP, ArrayList<Segment[]> AS, ArrayList<Barre> AB, ArrayList<Noeud_Simple> ANS, ArrayList<Appui_Simple> AAS, ArrayList<Appui_Double> AAD, ArrayList<Treillis> AT, ZoneConstructible ZC) {
         System.out.println("\n=====Points=====");
         for (int i = 0; i < AP.size(); i++) {
             System.out.println(AP.get(i));
@@ -125,10 +116,7 @@ public class Test_ensemble {
             }
 
         }
-        System.out.println("\n=====TrianglesTerrain=====");
-        for (int i = 0; i < ATT.size(); i++) {
-            System.out.println(ATT.get(i));
-        }
+
         System.out.println("\n=====Barres=====");
         for (int i = 0; i < AB.size(); i++) {
             System.out.println(AB.get(i));
@@ -145,7 +133,7 @@ public class Test_ensemble {
         for (int i = 0; i < AAD.size(); i++) {
             System.out.println(AAD.get(i));
         }
-        
+
         System.out.println("\n=====Treillis=====");
         for (int i = 0; i < AT.size(); i++) {
             System.out.println(AT.get(i));
@@ -153,53 +141,53 @@ public class Test_ensemble {
 
         System.out.println("-------------------------------------------------------------------\n" + ZC);
     }
-    
-    public static void  Test_Classe_Point(){
-        Point P0 = new Point(0,1, 0);
-        Point P1 = new Point(1,0, 1);
+
+    public static void Test_Classe_Point() {
+        Point P0 = new Point(0, 1, 0);
+        Point P1 = new Point(1, 0, 1);
         Segment S0 = new Segment(0, P0, P1);
-        System.out.println("Points\n"+P0+P1+S0);
-        System.out.println("Longueur "+ S0.LongueurSegment());
-        System.out.println("Angle verticale P0 par rapport à P1 "+P0.AngleVertical_DeuxPoints(P1));
-        System.out.println("Angle horizontale P0 par rapport à P1 "+P0.AngleHorizontal_DeuxPoints(P1));
-        System.out.println("Angle verticale P1 par rapport à P0 "+P1.AngleVertical_DeuxPoints(P0));
-        System.out.println("Angle horizontale P1 par rapport à P0 "+P1.AngleHorizontal_DeuxPoints(P0));
+        System.out.println("Points\n" + P0 + P1 + S0);
+        System.out.println("Longueur " + S0.LongueurSegment());
+        System.out.println("Angle verticale P0 par rapport à P1 " + P0.AngleVertical_DeuxPoints(P1));
+        System.out.println("Angle horizontale P0 par rapport à P1 " + P0.AngleHorizontal_DeuxPoints(P1));
+        System.out.println("Angle verticale P1 par rapport à P0 " + P1.AngleVertical_DeuxPoints(P0));
+        System.out.println("Angle horizontale P1 par rapport à P0 " + P1.AngleHorizontal_DeuxPoints(P0));
 
     }
-    
-    public static void Test_Position_Appui(){
-        Point P0 = new Point(1,1, 0);
-        Point P1 = new Point(0,0, 1);
+
+    public static void Test_Position_Appui() {
+        Point P0 = new Point(1, 1, 0);
+        Point P1 = new Point(0, 0, 1);
         Segment S0 = new Segment(0, P0, P1);
         Appui A0 = new Appui_Double(1, S0);
-        System.out.println("Position appui "+A0.getPos());
+        System.out.println("Position appui " + A0.getPos());
     }
-    
-    public static void Test_CompteurId_Points(){
-        Point P0 = new Point(1,1);
-        Point P1 = new Point(0,0);
-        Point P2 = new Point(1,1);
-        Point P3 = new Point(0,0);
+
+    public static void Test_CompteurId_Points() {
+        Point P0 = new Point(1, 1);
+        Point P1 = new Point(0, 0);
+        Point P2 = new Point(1, 1);
+        Point P3 = new Point(0, 0);
         System.out.println("Points : ");
-        System.out.println("P0 : "+ P0.getId());
-        System.out.println("P1 : "+ P1.getId());
-        System.out.println("P2 : "+ P2.getId());
-        System.out.println("P3 : "+ P3.getId());
-        
+        System.out.println("P0 : " + P0.getId());
+        System.out.println("P1 : " + P1.getId());
+        System.out.println("P2 : " + P2.getId());
+        System.out.println("P3 : " + P3.getId());
+
     }
-    
-    public static void Test_Angles(){
-        ArrayList <Barre> ARB = new ArrayList<>();
-        Point P0 = new Point(0,0);
-        Point P1 = new Point(1,0);
-        Point P2 = new Point(1,1);
-        Point P3 = new Point(-1,0);
-        Point P4 = new Point(-1,1);
-        System.out.println("P0 : "+ P0);
-        System.out.println("P1 : "+ P1);
-        System.out.println("P2 : "+ P2);
-        System.out.println("P3 : "+ P3);
-        System.out.println("P4 : "+ P4);
+
+    public static void Test_Angles() {
+        ArrayList<Barre> ARB = new ArrayList<>();
+        Point P0 = new Point(0, 0);
+        Point P1 = new Point(1, 0);
+        Point P2 = new Point(1, 1);
+        Point P3 = new Point(-1, 0);
+        Point P4 = new Point(-1, 1);
+        System.out.println("P0 : " + P0);
+        System.out.println("P1 : " + P1);
+        System.out.println("P2 : " + P2);
+        System.out.println("P3 : " + P3);
+        System.out.println("P4 : " + P4);
         Noeud_Simple N0 = new Noeud_Simple(P0);
         Noeud_Simple N2 = new Noeud_Simple(P2);
         Noeud_Simple N4 = new Noeud_Simple(P2);
@@ -222,14 +210,14 @@ public class Test_ensemble {
         Barre B5 = new Barre(N4, N0);
         ARB.add(B5);
         ResolutionContraintes RC = new ResolutionContraintes(ARB);
-        double [] Angle = RC.Calcul_Angle();
+        double[] Angle = RC.Calcul_Angle();
         for (int i = 0; i < Angle.length; i++) {
-            System.out.println("Angle "+i+" "+ Angle[i]);
-            
+            System.out.println("Angle " + i + " " + Angle[i]);
+
         }
     }
-    
-    public static void TestAngle2(){
+
+    public static void TestAngle2() {
         Point P = new Point(0, 0);
         Noeud_Simple N = new Noeud_Simple(P);
         Point P1 = new Point(0, 1);
@@ -244,21 +232,20 @@ public class Test_ensemble {
         System.out.println("P3 : " + N.Angle(P3));
         System.out.println("P4 : " + N.Angle(P4));
         System.out.println("P5 : " + N.Angle(P5));
-        
-        
+
     }
-    
-    public static void TestAngleNormal(){
-        Point P0 = new Point(1,-10);
+
+    public static void TestAngleNormal() {
+        Point P0 = new Point(1, -10);
         Point P1 = new Point(1, 0);
         Segment S = new Segment(0, P1, P0);
         Appui_Simple AS0 = new Appui_Simple(0.25, S);
-        System.out.println("Position appui "+AS0.getPos());
-        System.out.println("Angle horizontale "+ AS0.Angle(P1));
+        System.out.println("Position appui " + AS0.getPos());
+        System.out.println("Angle horizontale " + AS0.Angle(P1));
         //System.out.println("Angle "+ AS0.getAngleNormal());
     }
-    
-    public static void TestResolutionContrainte(){
+
+    public static void TestResolutionContrainte() {
         ZoneConstructible ZC = new ZoneConstructible(-5, 5, -5, 5);
         Point P0 = new Point(0, -2, 0);
         Point P1 = new Point(0, 2, 1);
@@ -267,14 +254,14 @@ public class Test_ensemble {
         Segment S0 = new Segment(0, P0, P1);
         Segment S1 = new Segment(1, P1, P2);
         Segment S2 = new Segment(2, P2, P0);
-        Segment [] S = new Segment [3];
+        Segment[] S = new Segment[3];
         S[0] = S0;
         S[1] = S1;
         S[2] = S2;
         Treillis T = new Treillis(0, ZC);
         Force F0 = new Force(0, 0);
-        Force F1 = new Force(-1000, Math.PI/2);
-        Appui_Double AD = new Appui_Double(T, 0 , 0.5, S0, F0);
+        Force F1 = new Force(-1000, Math.PI / 2);
+        Appui_Double AD = new Appui_Double(T, 0, 0.5, S0, F0);
         Appui_Simple AS = new Appui_Simple(T, 1, 1, S0, F0);
         Noeud_Simple NS = new Noeud_Simple(P3, T, 2, F1);
         TypeBarre TB = new TypeBarre(0);
@@ -289,17 +276,17 @@ public class Test_ensemble {
         ResolutionContrainteNoeuds RCN = new ResolutionContrainteNoeuds(ARN);
         Remonte_Inversion RI = RCN.Resolution();
         Matrice M = RI.getSolution();
-        System.out.println("Matrice : \n"+M);
+        System.out.println("Matrice : \n" + M);
     }
-    
-    public static void TestClassDessin(){
+
+    public static void TestClassDessin() {
         ClassDessin CD = new ClassDessin();
-        System.out.println("Contenu : "+CD.getContenu());
+        System.out.println("Contenu : " + CD.getContenu());
     }
-    
-    private static ClassDessin Generation_Liste_Figure (){
+
+    private static ClassDessin Generation_Liste_Figure() {
         ZoneConstructible ZC = new ZoneConstructible(10, 0, 100, 100);
-        Treillis T  = new Treillis(0, ZC);
+        Treillis T = new Treillis(0, ZC);
         TypeBarre TB = new TypeBarre(0);
         Force FN = new Force(50, 0);
         ArrayList<Figure> AF = new ArrayList<>();
@@ -308,7 +295,7 @@ public class Test_ensemble {
         Point P1 = new Point(1, 1, 1);
         AF.add(P1);
         Segment S0 = new Segment(0, ZC, P0, P1, 0, 1, 1);
-        
+
         AF.add(S0);
         Point P2 = new Point(2, 0, 0);
         AF.add(P2);
@@ -336,28 +323,28 @@ public class Test_ensemble {
         ClassDessin CD = new ClassDessin(AF);
         return CD;
     }
-    
-    public static void Test_Tri_Figure(){
+
+    public static void Test_Tri_Figure() {
         ClassDessin CD = Generation_Liste_Figure();
         ArrayList<Noeud> AN = CD.Tri_Des_Noeuds();
         System.out.println("Liste : " + AN);
     }
-    
-    private static void Test_Enregistrement() throws IOException{
+
+    private static void Test_Enregistrement() throws IOException {
         ClassDessin CD = Generation_Liste_Figure();
-        File F = new File ("Test.txt");
+        File F = new File("Test.txt");
         CD.Enregistrement(F);
     }
-   
-    private static void Test_Letcure() throws IOException{
+
+    private static void Test_Letcure() throws IOException {
         ClassDessin CD = Generation_Liste_Figure();
-        File F = new File ("Test.txt");
+        File F = new File("Test.txt");
         FormatRetourEnregistrement FRE = CD.Lecture_Fichier(F);
         System.out.println(FRE);
-        
+
     }
-    
-    private  static ArrayList<Figure> Generation_AF(){
+
+    private static ArrayList<Figure> Generation_AF() {
         ArrayList<Figure> AF = new ArrayList<>();
         ZoneConstructible ZC = new ZoneConstructible(-5, 5, -5, 5);
         Point P0 = new Point(0, -2, 0);
@@ -374,14 +361,14 @@ public class Test_ensemble {
         AF.add(S1);
         Segment S2 = new Segment(2, ZC, P2, P0, 0, 1, 0);
         AF.add(S2);
-        Segment [] S = new Segment [3];
+        Segment[] S = new Segment[3];
         S[0] = S0;
         S[1] = S1;
         S[2] = S2;
         Treillis T = new Treillis(0, ZC);
         Force F0 = new Force(0, 0, 0);
-        Force F1 = new Force(-1000, Math.PI/2, 1);
-        Appui_Double AD = new Appui_Double(T, 0 , 0.5, S0, F0);
+        Force F1 = new Force(-1000, Math.PI / 2, 1);
+        Appui_Double AD = new Appui_Double(T, 0, 0.5, S0, F0);
         AF.add(AD);
         Appui_Simple AS = new Appui_Simple(T, 1, 1, S0, F0);
         AF.add(AS);
@@ -396,8 +383,8 @@ public class Test_ensemble {
         AF.add(B3);
         return AF;
     }
-    
-    public static void TestEnrLecRes() throws IOException{
+
+    public static void TestEnrLecRes() throws IOException {
         ArrayList<Figure> AF = Generation_AF();
         ClassDessin CD = new ClassDessin(AF);
         File file = new File("Test1.txt");
@@ -408,11 +395,11 @@ public class Test_ensemble {
         ResolutionContrainteNoeuds RCN = new ResolutionContrainteNoeuds(AN);
         Remonte_Inversion RI = RCN.Resolution();
         Matrice M = RI.getSolution();
-        System.out.println("Matrice : \n"+M);
-        
+        System.out.println("Matrice : \n" + M);
+
     }
-    
-    public static void main(String[] args) throws IOException{
+
+    public static void main(String[] args) throws IOException {
         //Test_definition_classes();
         //Test_Classe_Point();
         //Test_Position_Appui();
@@ -420,19 +407,13 @@ public class Test_ensemble {
         //Test_Angles();
         //TestAngle2();
         //TestAngleNormal();
-        TestResolutionContrainte();        
+        //TestResolutionContrainte();        
         //TestClassDessin();
         //Test_Tri_Figure();
         //Test_Enregistrement();
         //Test_Letcure();
         //TestEnrLecRes();
-        
-       
-        
+
     }
 
-    
 }
-
-
-

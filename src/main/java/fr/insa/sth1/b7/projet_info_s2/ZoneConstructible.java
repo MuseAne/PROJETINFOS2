@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fr.insa.sth1.b7.projet_info_s2;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author theob
- */
 public class ZoneConstructible {
 
     private double Xmax;
@@ -30,12 +21,12 @@ public class ZoneConstructible {
 
     public String toString() {
         String res;
-        res = "\n --ZoneConstructible--\n- Xmin : " + Xmin + "\n- Xmax : " + Xmax + "\n- Ymin : " + Ymin + "\n- Ymax : " + Ymax + "\nContient les treillis : "+ Treillis_ZoneConstructible.getId()+ "\nContient les segments : ";
+        res = "\n --ZoneConstructible--\n- Xmin : " + Xmin + "\n- Xmax : " + Xmax + "\n- Ymin : " + Ymin + "\n- Ymax : " + Ymax + "\nContient les treillis : " + Treillis_ZoneConstructible.getId() + "\nContient les segments : ";
         for (int i = 0; i < SegmentsContenu.size(); i++) {
             res = res + "\n-> " + SegmentsContenu.get(i).getId();
 
         }
-        
+
         return res;
     }
 
@@ -67,16 +58,13 @@ public class ZoneConstructible {
         setTreillis_ZoneConstructible(T);
     }
 
-    /**
-     * @param Treillis_ZoneConstructible the Treillis_ZoneConstructible to set
-     */
     public void setTreillis_ZoneConstructible(Treillis Treillis_ZoneConstructible) {
         this.Treillis_ZoneConstructible = Treillis_ZoneConstructible;
     }
 
     public String Enregistrement() {
         String S;
-        S = "ZoneConstructible ;"+ Xmin + " ; "+ Xmax + " ; " + Ymin +" ; " + Ymax+ "\n";
+        S = "ZoneConstructible ;" + Xmin + " ; " + Xmax + " ; " + Ymin + " ; " + Ymax + "\n";
         return S;
     }
 }
