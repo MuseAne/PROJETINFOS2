@@ -15,9 +15,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         primaryStage.getIcons().add(new Image("file:Image_Logo.png"));
-        primaryStage.setTitle("TREILLIS");
-
-        //Scene scene = new Scene(new MainDessinPane());
+        primaryStage.setTitle("PROJET S2");
         scene = new Scene(new GlobalPane(primaryStage));
         primaryStage.setScene(scene);
         primaryStage.show();

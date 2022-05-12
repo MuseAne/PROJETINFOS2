@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fr.insa.sth1.b7.projet_info_s2.gui;
 
 import fr.insa.sth1.b7.projet_info_s2.Appui;
@@ -34,10 +29,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-/**
- *
- * @author drumm
- */
 public class GlobalPane extends BorderPane {
 
     private ToggleButton Terrain;
@@ -84,7 +75,6 @@ public class GlobalPane extends BorderPane {
     private Label UTextLabel;
     private MainMenu menu;
     private String NomUtilisatuer = "";
-
 
     public GlobalPane(Stage inStage, String UText) {
         this(inStage, null, new ClassDessin(), 0, 0, 0, 0, 0, 0, UText);
@@ -228,7 +218,7 @@ public class GlobalPane extends BorderPane {
         hTerrain.setSpacing(8);
         hPont.setSpacing(8);
 
-        //partie déco (logo INSA, connecté en tant que etc...)
+        //partie déco (logo INSA)
         Rectangle rectangle0 = new Rectangle();
         rectangle0.setWidth(100);
         rectangle0.setHeight(3);
@@ -728,7 +718,7 @@ public class GlobalPane extends BorderPane {
             ArrayList<Noeud> AN = controleur.getVue().getModel().Tri_Des_Noeuds();
             ArrayList<Barre> AB = controleur.getVue().getModel().Tri_Des_Barres();
             ArrayList<Segment> AS = controleur.getVue().getModel().Tri_Des_Segment();
-            if (AN.isEmpty() || AB.isEmpty() || AS.size() == 0) {
+            if (AN.isEmpty() || AB.isEmpty() || AS.isEmpty()) {
                 Aide.setText("La simulation est impossible, vous devez avoir au moins un Segment, une Barre et un Noeud.");
             } else {
                 controleur.boutonSimulation(t);
@@ -745,15 +735,15 @@ public class GlobalPane extends BorderPane {
                         System.out.println("+++Point");
                         ArrayList<Segment> AS = ((Point) F).getSegment_Point();//On récupère tous les segments qui touchent le point
                         System.out.println("AS : " + AS);
-                        if (AS.size() > 0) {
+                        if (!AS.isEmpty()) {
                             for (Segment S : AS) {
                                 ArrayList<Appui> AA = S.getAppui();//On récupère tous les appuis qui touchent les segments qui touchent le point
                                 System.out.println("AA : " + AA);
-                                if (AA.size() > 0) {
+                                if (!AA.isEmpty()) {
                                     for (Appui A : AA) {
                                         ArrayList<Barre> AB = A.getBarre(); //On récupère toutes les barres de tous les appuis
                                         System.out.println("AB : " + AB);
-                                        if (AB.size() > 0) {
+                                        if (!AB.isEmpty()) {
                                             for (Barre B : AB) {
                                                 controleur.getVue().getModel().Remove(B); //On enlève la barre de la liste de figure du model
                                                 controleur.getVue().getModel().MAJ_Ids(B, B.getId()); //On met à jours les identificateurs
@@ -765,7 +755,7 @@ public class GlobalPane extends BorderPane {
                                                     if (B.getNoeuds_Barre(j) != A) {//On prend l'autre noued que l'appui pour lui enlever la barre pour ne pas avoir de bare présente dans la liste de ce noeud alors que normalement elle n'existe plus
                                                         B.getNoeuds_Barre(j).removeBarre(B);
                                                     }
-                                                }//System.out.println("\nID Barres : "+controleur.getIdBarre()+"\n");
+                                                }
                                             }
                                         }
                                         controleur.getVue().getModel().Remove(A); //On enlève l'appui
@@ -797,12 +787,9 @@ public class GlobalPane extends BorderPane {
                                 controleur.setIdBarre(controleur.getIdBarre() - 1);
                                 System.out.println("OK " + i + " fois");
                                 i++;
-                                /*
-                                for(int i = 0; i < 2 ; i++){
-                B.getNoeuds_Barre(i).removeBarre(B);
-                                 */
+
                             }
-                            //}
+
                             controleur.getVue().getModel().Remove(A);
                             controleur.getVue().getModel().MAJ_Ids(A, A.getId());
                             controleur.setIdNoeud(controleur.getIdNoeud() - 1);
@@ -810,11 +797,7 @@ public class GlobalPane extends BorderPane {
                         controleur.getVue().getModel().Remove(F);
                         controleur.getVue().getModel().MAJ_Ids(F, F.getId());
                         controleur.setIdSegment(controleur.getIdSegment() - 1);
-                        /*
-                        Segment S = (Segment) F;
-                        for(int i = 0; i < 2; i++){
-                S.getExtremite(i).removeSegment(S);
-            }*/
+
                         for (int j = 0; j < 2; j++) {
 
                             ((Segment) F).getExtremite(j).removeSegment(((Segment) F));
@@ -836,9 +819,7 @@ public class GlobalPane extends BorderPane {
                                     B.getNoeuds_Barre(j).removeBarre(B);
                                 }
                             }
-                            /* for(int i = 0; i < 2 ; i++){
-                B.getNoeuds_Barre(i).removeBarre(B);
-            }*/
+
                         }
                         controleur.getVue().getModel().Remove(F);
                         controleur.getVue().getModel().MAJ_Ids(F, F.getId());
@@ -885,7 +866,7 @@ public class GlobalPane extends BorderPane {
             ArrayList<Noeud> AN = controleur.getVue().getModel().Tri_Des_Noeuds();
             ArrayList<Barre> AB = controleur.getVue().getModel().Tri_Des_Barres();
             ArrayList<Segment> AS = controleur.getVue().getModel().Tri_Des_Segment();
-            if (AN.isEmpty() || AB.isEmpty() || AS.size() == 0) {//En fait, seule le fait que la liste des segments ne doit pas être vide suffit,mais cela n'a pas vraiment de sens d'enregistrer un fichier sans au moins une des trois conditions donc ce n'est pas très déreangant
+            if (AN.isEmpty() || AB.isEmpty() || AS.isEmpty()) {//En fait, seule le fait que la liste des segments ne doit pas être vide suffit,mais cela n'a pas vraiment de sens d'enregistrer un fichier sans au moins une des trois conditions donc ce n'est pas très déreangant
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Erreur");
                 alert.setHeaderText("Problème durant la sauvegarde\n\nPour sauvegarder un fichier, celui_ci doit contenir au moins : \n-Une barre\n-Un noeud simple\n-Un segment");
@@ -925,93 +906,54 @@ public class GlobalPane extends BorderPane {
         this.Dessin.redrawAll();
     }
 
-    /**
-     * @return the model
-     */
     public ClassDessin getModel() {
         return model;
     }
 
-    /**
-     * @return the controleur
-     */
     public Controleur getControleur() {
         return controleur;
     }
 
-    /**
-     * @return the Terrain
-     */
     public ToggleButton getTerrain() {
         return Terrain;
     }
 
-    /**
-     * @return the Segment
-     */
     public ToggleButton getSegment() {
         return Segment;
     }
 
-    /**
-     * @return the Point
-     */
     public ToggleButton getPoint() {
         return Point;
     }
 
-    /**
-     * @return the Pont
-     */
     public ToggleButton getPont() {
         return Pont;
     }
 
-    /**
-     * @return the AppuiSimple
-     */
     public ToggleButton getAppuiSimple() {
         return AppuiSimple;
     }
 
-    /**
-     * @return the AppuiDouble
-     */
     public ToggleButton getAppuiDouble() {
         return AppuiDouble;
     }
 
-    /**
-     * @return the Noeuds
-     */
     public ToggleButton getNoeuds() {
         return Noeuds;
     }
 
-    /**
-     * @return the Barres
-     */
     public ToggleButton getBarres() {
         return Barres;
     }
 
-    /**
-     * @return the Simulation
-     */
     public ToggleButton getSimulation() {
         return Simulation;
     }
 
-    /**
-     * @return the Enregistrer
-     */
     public Button getEnregistrer() {
         return Enregistrer;
     }
 
-    /**
-     * @return the Couleur
-     */
     public ColorPicker getCouleur() {
         return Couleur;
     }
