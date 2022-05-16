@@ -63,8 +63,8 @@
                     <stripDebug>true</stripDebug>
                     <noManPages>true</noManPages>
                     <mainClass>Projet_Info_S2/fr.insa.sth1.b7.projet_info_s2.gui.Main</mainClass>
-                    <launcher>PROJET S2</launcher>
-                    <jlinkImageName>PROJET S2</jlinkImageName>
+                    <launcher>BRIDGIES</launcher>
+                    <jlinkImageName>BRIDGIES</jlinkImageName>
 <!-- pour zipper le dossier image
  je ne le fais pas car je veux créer d'abord un raccourci vers le launcher
                 <jlinkZipName>TutoVideoDessin</jlinkZipName>
