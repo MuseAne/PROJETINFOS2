@@ -3,7 +3,6 @@ package fr.insa.sth1.b7.projet_info_s2.gui;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -14,7 +13,6 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        primaryStage.getIcons().add(new Image("file:Image_Logo.png"));
         primaryStage.setTitle("PROJET S2");
         scene = new Scene(new GlobalPane(primaryStage));
         primaryStage.setScene(scene);

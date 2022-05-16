@@ -170,7 +170,6 @@ public class Controleur {
             //Gère la fonction du bouton Point
             double px = t.getX();
             double py = t.getY();
-            ClassDessin model = this.getVue().getModel();
             this.getVue().getModel().addFigure(new Point(px, py, IdPoint, getVue().getCouleur().getValue()));
             IdPoint++;
             System.out.println("\n" + getVue().getModel());
@@ -248,9 +247,6 @@ public class Controleur {
                 Barre B = new Barre(IdBarre, pos2[0], pos2[1], getVue().getCouleur().getValue());
                 getVue().getModel().addFigure(B);     // Changer 0 par l'indentificateur //
                 IdBarre++;
-                double C = Double.parseDouble(getVue().getCout());
-                C = C + B.getCout();
-                getVue().setCout("" + ((int) C));
                 System.out.println("\n" + getVue().getModel());
                 getVue().redrawAll();
                 getVue().setTextByMoi("Placez 2 points pour créer une barre ou reliez 2 noeuds déjà existants");
@@ -262,61 +258,6 @@ public class Controleur {
             getVue().getModel().addFigure(new Noeud_Simple(pClic, IdNoeud, getVue().getCouleur().getValue()));
             IdNoeud++;
             System.out.println("\n" + getVue().getModel());
-            getVue().redrawAll();
-        } else if (etat == 90) {
-            // Gère la fonction du bouton Vertical (reconnaissance du point ou noeud le plus proche
-            getVue().setTextByMoi("Cliquez sur la figure sur laquelle vous voulez vous baser");
-            Point pClic = new Point(t.getX(), t.getY());
-            Point P = getVue().getModel().PointPlusProche(pClic, Double.MAX_VALUE);
-            Noeud N = getVue().getModel().NoeudPlusProche(pClic, Double.MAX_VALUE);
-            double D0 = P.getDistance(pClic);
-            double D1 = N.getDistance(pClic);
-            if (D0 < D1) {
-                pos3[0] = P.getAbscisse();
-                changeEtat(91);
-            } else {
-                pos3[0] = N.getPos().getAbscisse();
-                changeEtat(92);
-            }
-        } else if (etat == 91) {
-            // Gère la fonction du bouton Vertical (placer un point)
-            getVue().setTextByMoi("Cliquez à l'endroit où vous voulez positionner votre Point");
-            double Ord = t.getY();
-            getVue().getModel().addFigure(new Point(pos3[0], Ord));
-            getVue().redrawAll();
-
-        } else if (etat == 92) {
-            // Gère la fonction du bouton Vertical (placer un noeud)
-            getVue().setTextByMoi("Cliquez à l'endroit où vous voulez positionner votre Noeud");
-            double Ord = t.getY();
-            getVue().getModel().addFigure(new Noeud_Simple(pos3[0], Ord, IdNoeud, getVue().getCouleur().getValue()));
-            getVue().redrawAll();
-        } else if (etat == 100) {
-            // Gère la fonction du bouton Horizontal (reconnaissance du point ou du noeud le plus proche
-            getVue().setTextByMoi("Cliquez sur la figure sur laquelle vous voulez vous baser");
-            Point pClic = new Point(t.getX(), t.getY());
-            Point P = getVue().getModel().PointPlusProche(pClic, Double.MAX_VALUE);
-            Noeud N = getVue().getModel().NoeudPlusProche(pClic, Double.MAX_VALUE);
-            double D0 = P.getDistance(pClic);
-            double D1 = N.getDistance(pClic);
-            if (D0 < D1) {
-                pos3[0] = P.getOrdonnee();
-                changeEtat(101);
-            } else {
-                pos3[0] = N.getPos().getOrdonnee();
-                changeEtat(102);
-            }
-        } else if (etat == 101) {
-            // Gère la fonction du bouton Horizontal (placer un point)
-            getVue().setTextByMoi("Cliquez à l'endroit où vous voulez positionner votre Point");
-            double Abs = t.getX();
-            getVue().getModel().addFigure(new Point(Abs, pos3[0]));
-            getVue().redrawAll();
-        } else if (etat == 102) {
-            // Gère la fonction du bouton Horizontal (placer un noeud)
-            getVue().setTextByMoi("Cliquez à l'endroit où vous voulez positionner votre Noeud");
-            double Abs = t.getX();
-            getVue().getModel().addFigure(new Noeud_Simple(Abs, pos3[0], IdNoeud, getVue().getCouleur().getValue()));
             getVue().redrawAll();
         } else if (etat == 120) {
             // Gère la fonction du bouton Valider
@@ -382,16 +323,6 @@ public class Controleur {
         changeEtat(80);
     }
 
-    public void boutonVertical(ActionEvent t) {
-        // Bouron Vertical
-        changeEtat(90);
-    }
-
-    public void boutonHorizontal(ActionEvent t) {
-        // Bouton Horizontal
-        changeEtat(100);
-    }
-
     public void boutonSimulation(ActionEvent t) {
         // Gère la fonction du bouton Simulation
         Remonte_Inversion ri = getVue().getModel().Simulation();
@@ -412,7 +343,7 @@ public class Controleur {
 
     public void menuNouveau(ActionEvent t) {
         Stage nouveau = new Stage();
-        nouveau.setTitle("BRIDGE");
+        nouveau.setTitle("PROJET S2");
         nouveau.getIcons().add(new Image("file:Image_Logo.png"));
         Scene sc = new Scene(new GlobalPane(nouveau, getVue().getUText()));
         nouveau.setScene(sc);
@@ -433,13 +364,13 @@ public class Controleur {
                 ArrayList<Point> AP = cdOuvrir.Tri_Des_Point();
                 ArrayList<Force> AF = cdOuvrir.Recup_Force(AN);
                 Stage nouveau = new Stage();
-                nouveau.setTitle("BRIDGIES " + f.getName());
+                nouveau.setTitle("PROJET S2 " + f.getName());
                 GlobalPane GP = new GlobalPane(nouveau, f, cdOuvrir, AS.size(), AP.size(), AN.size(), AB.size(), AF.size(), FRE.getCout(), getVue().getUText());
                 Scene sc = new Scene(GP);
                 nouveau.setScene(sc);
                 nouveau.show();
                 GP.redrawAll();
-            } catch (Exception ex) {
+            } catch (IOException ex) {
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.setTitle("Erreur");
                 alert.setHeaderText("Problème durant la sauvegarde");
@@ -457,7 +388,7 @@ public class Controleur {
             this.getVue().getModel().getTreillisCD();
             this.getVue().getModel().Enregistrement(f, getVue());
             this.getVue().setCurFile(f);
-            this.getVue().getInStage().setTitle("BRIDGE" + f.getName());
+            this.getVue().getInStage().setTitle("PROJET S2" + f.getName());
         } catch (IOException ex) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Erreur");
@@ -487,7 +418,7 @@ public class Controleur {
     }
 
     public void menuAPropos(ActionEvent t) {
-        Label aPropos = new Label("Ce logiciel a été dévellopé par trois gugus en STH1 durant l'année de 2020 / 2021, année Coronus, dans le cadre d'un projet d'informatique pour le deuxième semestre.\n\n\nSinon, j'ai une blague : \nf et f' sont sur un bateau, f tombe à l'eau, que se passe t-il?\n\n\nLe bateau dérive ;-) ;-)\n");
+        Label aPropos = new Label("\nCe logiciel a été dévellopé par Tiberi Hugo, Poulain Maël et Ferandel Juliette dans le cadre d'un projet d'informatique pour le deuxième semestre.\n");
 
         StackPane secondaryLayout = new StackPane();
         secondaryLayout.getChildren().add(aPropos);
@@ -495,7 +426,7 @@ public class Controleur {
 
         Stage newWindow = new Stage();
         newWindow.getIcons().add(new Image("file:Image_Logo.png"));
-        newWindow.setTitle("BRIDGIES - Fenêtre d'aide");
+        newWindow.setTitle("PROJET S2 - Fenêtre d'aide");
         newWindow.setScene(secondScene);
 
         newWindow.show();
@@ -512,8 +443,6 @@ public class Controleur {
                 + " - Barre : reliez 2 noeuds / appuis pour y former une barre\n\n"
                 + " - Simulation : une fois le treillis fini, appuyez sur simulation. Un treillis vert = treillis isostatique, si message dans la partie inférieure, alors le treillis n'est pas isostatique\n\n"
                 + " - Force : entrez la norme du vecteur force ainsi que son angle, puis validez et sélectionnez le noeud sur lesquel vous voulez appliquer cette force\n\n"
-                + " - Vertical : sélectionnez le point ou le noeud sur lequel vous voulez vous baser (pour son abscisse), puis cliquez où vous voulez pour créer la nouvelle figure voulue\n"
-                + " - Horizontal : sélectionnez le point ou le noeud sur lequel vous voulez vous baser (pour son ordonnée), puis cliquez où vous voulez pour créer la nouvelle figure voulue\n\n"
                 + " - Sélectionner : cliquez et la forme sélectionnée devient bleue. Appuyez sur ctrl et vous pourrez en sélectionner plusieurs\n"
                 + " - Supprimer : sélectionnez d'abord les figures avec le bouton sélectionner (voir au-dessus) puis appuyez sur supprimer. Les figures auront disparues");
 
@@ -525,14 +454,14 @@ public class Controleur {
 
         Stage newWindow = new Stage();
         newWindow.getIcons().add(new Image("file:Image_Logo.png"));
-        newWindow.setTitle("BRIDGIES - Fenêtre d'aide");
+        newWindow.setTitle("PROJET S2 - Fenêtre d'aide");
         newWindow.setScene(secondScene);
 
         newWindow.show();
     }
 
     public void menuFAQ(ActionEvent t) {
-        Label premireQuestion = new Label("\nQuelle est la différence entre un Point, un Noeud, un Appui Simple et un Appui Double?\nUn Point est l'extremité d'un segment ou le lieu d'intersection, tandis qu'un Noeud, un Appui Simple ou un Appui double sont des extrémités ou des lieu d'intersection de barres.\n\nQuelle est la différence entre une Barre et un Segment?\nUne Barre relie 2 Noeuds/Appui Simple/Appui Double, tandis qu'un segment relie 2 Points.\n\nQuelle est la différence entre un Appui Simple/Double et un Noeud?\nUn Appui Simple/Double est obligatoirement fixé à un segment tandis qu'un Noeud peut-être situé n'importe ou dans l'espace.\n\nQuelle est la différence entre un Appui Simple et un Appui Double?\nUn appui Simple peut se déplacer tangeanciellement au terrain, c'est à dire que sa réaction est perpendiculaire au terrain, \npar contre, un appui Double, lui, est fixe par rapport au terrain, ainsi il poossède deux valeurs de réaction inconnues et indépendantes, une selon X et la seconde selon Y.\n\nComment définir un terrain?\nUn terrain se définie simplement par un segment, il n'y a alor pas besoin de faire un triangle terrain, \nvous pouvez eventuellement le dessiner mais celui-ci ne rentrera pas en compte dans les calculs.\n\n Comment créer une force?\nPour créer une force, il faut d'abord cliquer sur le bouton force, puis entre la norme de la force et l'angle. Ensuite cliquer sur valider \net cliquer sur un Noeud dans la zone dessin, vous ne verrai alors pas directement, mais la force sera bien ajoutée.\n\nA quoi correspond l'angle d'une force?\nL'angle permet de définir la direction et le sens de la force. L'angle 0 est définie come étant l'angle décrivant une direction verticale et un sens vers le bas. \nEnsuite, les valeurs sont demandées en radiant et cela tourne dans le sens trigonométrique, ce qui signifie qu'un angle de PI/2 définit une direction verticale et un sens vers la droite.\nATTENTION, le logiciel n'accepte pas les Strings en entrés dans les champs de l'angle et de la force. Ainsi, il faut mettre 1.57 au lieu de PI/2 par exemple.\n\nComment enregistrer un fichier?\nPour enregistre un fichier, il faut clqieur sur enregistre se placer ou l'on veut, mettre le nom que l'on souhaite, et surtout, ATTENTION, il ne faut pas oublier de mettre à la fin.txt pour que le fichier puise être relue\n\nComment fait-on des frites à la poelle?\nPour faire des frites dans une poele, on prend une poele, on met un fond d'huile, on fait cahuffer, pendant ce temps, \non coupe finement les pommes de terre en forme de frite, puis on les même dans la poêle.\nOn laisse cuirre 20-25 minutes histoire que se soit un petit peu cramé croisstillant, et on déguste.\n\nQuelle est la meilleur équipe de football au monde?\nC'est bien évidemment l'AJAuxerre :-).");
+        Label premireQuestion = new Label("\nQuelle est la différence entre un Point, un Noeud, un Appui Simple et un Appui Double?\nUn Point est l'extremité d'un segment ou le lieu d'intersection, tandis qu'un Noeud, un Appui Simple ou un Appui double sont des extrémités ou des lieu d'intersection de barres.\n\nQuelle est la différence entre une Barre et un Segment?\nUne Barre relie 2 Noeuds/Appui Simple/Appui Double, tandis qu'un segment relie 2 Points.\n\nQuelle est la différence entre un Appui Simple/Double et un Noeud?\nUn Appui Simple/Double est obligatoirement fixé à un segment tandis qu'un Noeud peut-être situé n'importe ou dans l'espace.\n\nQuelle est la différence entre un Appui Simple et un Appui Double?\nUn appui Simple peut se déplacer tangeanciellement au terrain, c'est à dire que sa réaction est perpendiculaire au terrain, \npar contre, un appui Double, lui, est fixe par rapport au terrain, ainsi il poossède deux valeurs de réaction inconnues et indépendantes, une selon X et la seconde selon Y.\n\nComment définir un terrain?\nUn terrain se définie simplement par un segment, il n'y a alor pas besoin de faire un triangle terrain, \nvous pouvez eventuellement le dessiner mais celui-ci ne rentrera pas en compte dans les calculs.\n\n Comment créer une force?\nPour créer une force, il faut d'abord cliquer sur le bouton force, puis entre la norme de la force et l'angle. Ensuite cliquer sur valider \net cliquer sur un Noeud dans la zone dessin, vous ne verrai alors pas directement, mais la force sera bien ajoutée.\n\nA quoi correspond l'angle d'une force?\nL'angle permet de définir la direction et le sens de la force. L'angle 0 est définie come étant l'angle décrivant une direction verticale et un sens vers le bas. \nEnsuite, les valeurs sont demandées en radiant et cela tourne dans le sens trigonométrique, ce qui signifie qu'un angle de PI/2 définit une direction verticale et un sens vers la droite.\nATTENTION, le logiciel n'accepte pas les Strings en entrés dans les champs de l'angle et de la force. Ainsi, il faut mettre 1.57 au lieu de PI/2 par exemple.\n\nComment enregistrer un fichier?\nPour enregistre un fichier, il faut clqieur sur enregistre se placer ou l'on veut, mettre le nom que l'on souhaite, et surtout, ATTENTION, il ne faut pas oublier de mettre à la fin.txt pour que le fichier puise être relue.");
 
         StackPane secondaryLayout = new StackPane();
         secondaryLayout.getChildren().add(premireQuestion);
@@ -541,7 +470,7 @@ public class Controleur {
         Stage newWindow = new Stage();
         //     newWindow.setX()
         newWindow.getIcons().add(new Image("file:Image_Logo.png"));
-        newWindow.setTitle("BRIDGIES - FAQ");
+        newWindow.setTitle("PROJET S2 - FAQ");
         newWindow.setScene(secondScene);
 
         newWindow.show();

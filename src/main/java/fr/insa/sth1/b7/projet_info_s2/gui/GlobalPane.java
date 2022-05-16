@@ -17,8 +17,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -34,7 +32,7 @@ public class GlobalPane extends BorderPane {
     private ToggleButton Terrain;
     private ToggleButton Segment;
     private ToggleButton Point;
-    private ToggleButton Pont;
+    private ToggleButton Treilli;
     private ToggleButton AppuiSimple;
     private ToggleButton AppuiDouble;
     private ToggleButton Noeuds;
@@ -49,8 +47,6 @@ public class GlobalPane extends BorderPane {
     private Button Nouveau;
     private ColorPicker Couleur;
     private ToggleButton Sélectionner;
-    private ToggleButton Vertical;
-    private ToggleButton Horizontal;
     private Button Force;
     private Button Valider;
     private TextField Norme;
@@ -62,10 +58,6 @@ public class GlobalPane extends BorderPane {
     private Label NormeForce = new Label();
     private Label AngleForce = new Label();
     private Label ContraintesBarres = new Label();
-    private Label Cout = new Label("0");
-    private Label NomCout = new Label("Cout : ");
-    private Label SymboleEuro = new Label(" €");
-
     private ClassDessin model;
     private Controleur controleur;
 
@@ -110,145 +102,112 @@ public class GlobalPane extends BorderPane {
         this.Aide = new Label();
         this.Dessin = new DessinCanvas(this);
         this.Sélectionner = new ToggleButton("Sélectionner");
-        this.Vertical = new ToggleButton("Vertical");
-        this.Horizontal = new ToggleButton("Horizontal");
         this.Force = new Button("Force");
         this.Valider = new Button("Valider");
         this.Norme = new TextField("Norme (en N)");
         this.Angle = new TextField("Angle (en rad)");
         this.Supprimer = new Button("Supprimer");
-        this.setCout("" + ((int) Prix));
-        this.Vertical.setPrefSize(120, 25);
-        this.Horizontal.setPrefSize(120, 25);
         this.Sélectionner.setPrefSize(120, 25);
         this.Norme.setPrefSize(100, 25);
         this.Angle.setPrefSize(100, 25);
         this.Supprimer.setPrefSize(120, 25);
-
         this.Aide.setFont(javafx.scene.text.Font.font(15));
 
 //----------- Concerne les insertions des icones dans les différents boutons ainsi que leur taille -----------//
         //----------- Bouton Terrain -----------//
-        ImageView iconTerrain = new ImageView(new Image("file:Image_Terrain.png"));
-        this.Terrain = new ToggleButton("Terrain", iconTerrain);
+        this.Terrain = new ToggleButton("Terrain");
         this.Terrain.setContentDisplay(ContentDisplay.TOP);
         this.Terrain.setPrefSize(100, 100);
 
-        //----------- Bouton Pont -----------//
-        ImageView iconPont = new ImageView(new Image("file:Image_Pont.png"));
-        this.Pont = new ToggleButton("Pont", iconPont);
-        this.Pont.setContentDisplay(ContentDisplay.TOP);
-        this.Pont.setPrefSize(100, 100);
+        //----------- Bouton Treilli -----------//
+        this.Treilli = new ToggleButton("Treilli");
+        this.Treilli.setContentDisplay(ContentDisplay.TOP);
+        this.Treilli.setPrefSize(100, 100);
 
         //----------- Bouton Ouvrir -----------//
-        ImageView iconOuvrir = new ImageView(new Image("file:Image_Ouvrir.png"));
-        this.Ouvrir = new Button("  Ouvrir", iconOuvrir);
+        this.Ouvrir = new Button("Ouvrir");
         this.Ouvrir.setPrefSize(120, 33);
 
         //----------- Bouton Enregistrer -----------//
-        ImageView iconEnregistrer = new ImageView(new Image("file:Image_Enregistrer.png"));
-        this.Enregistrer = new Button("  Enregistrer", iconEnregistrer);
+        this.Enregistrer = new Button("Enregistrer");
         this.Enregistrer.setPrefSize(120, 33);
 
         //----------- Bouton Nouveau -----------//
-        ImageView iconNouveau = new ImageView(new Image("file:Image_Nouveau.png"));
-        this.Nouveau = new Button("  Nouveau", iconNouveau);
+        this.Nouveau = new Button("Nouveau");
         this.Nouveau.setPrefSize(120, 33);
 
         //----------- Bouton Segment -----------//
-        ImageView iconSegment = new ImageView(new Image("file:Image_Segment.png"));
-        this.Segment = new ToggleButton("Segment", iconSegment);
+        this.Segment = new ToggleButton("Segment");
         this.Segment.setPrefSize(100, 50);
 
         //----------- Bouton Point -----------//
-        ImageView iconPoint = new ImageView(new Image("file:Image_Point.png"));
-        this.Point = new ToggleButton("    Point", iconPoint);
+        this.Point = new ToggleButton("Point");
         this.Point.setPrefSize(100, 50);
 
         //----------- Bouton Appui Simple -----------//
-        ImageView iconAppuiSimple = new ImageView(new Image("file:Image_Appui_Simple.png"));
-        this.AppuiSimple = new ToggleButton(" Appui \n Simple", iconAppuiSimple);
+        this.AppuiSimple = new ToggleButton("Appui \nSimple");
         this.AppuiSimple.setPrefSize(100, 50);
 
         //----------- Bouton Appui Double -----------//
-        ImageView iconAppuiDouble = new ImageView(new Image("file:Image_Appui_Double.png"));
-        this.AppuiDouble = new ToggleButton(" Appui \n Double", iconAppuiDouble);
+        this.AppuiDouble = new ToggleButton("Appui \nDouble");
         this.AppuiDouble.setPrefSize(100, 50);
 
         //----------- Bouton Noeuds -----------//
-        ImageView iconNoeuds = new ImageView(new Image("file:Image_Noeuds.png"));
-        this.Noeuds = new ToggleButton("Noeuds", iconNoeuds);
+        this.Noeuds = new ToggleButton("Noeuds");
         this.Noeuds.setPrefSize(100, 50);
 
         //----------- Bouton Barres -----------//
-        ImageView iconBarres = new ImageView(new Image("file:Image_Barres.png"));
-        this.Barres = new ToggleButton(" Barres", iconBarres);
+        this.Barres = new ToggleButton("Barres");
         this.Barres.setPrefSize(100, 50);
 
-        // ----------- Logo INSA -----------//
-        ImageView iconINSA = new ImageView(new Image("file:Image_INSA.png"));
-
-        //----------- Bouton Pont -----------//
-        ImageView iconSimulation = new ImageView(new Image("file:Image_Simulation.png"));
-        this.Simulation = new ToggleButton("Simulation", iconSimulation);
+        //----------- Bouton Treilli -----------//
+        this.Simulation = new ToggleButton("Simulation");
         this.Simulation.setContentDisplay(ContentDisplay.TOP);
         this.Simulation.setPrefSize(100, 100);
 
         //----------- Bouton Force -----------//
-        ImageView iconForce = new ImageView(new Image("file:Image_Force.png"));
-        this.Force = new Button(" Force", iconForce);
+        this.Force = new Button("Force");
         this.Force.setPrefSize(100, 50);
 
         //----------- Bouton Barres -----------//
-        ImageView iconValider = new ImageView(new Image("file:Image_Valider.png"));
-        this.Valider = new Button(" Valider", iconValider);
+        this.Valider = new Button("Valider");
         this.Valider.setPrefSize(200, 50);
 
 //----------- Concerne les éléments de la partie haute de l'interface -----------//
         // Gère les groupe de boutons à l'aide de HBox et VBox
         VBox bTerrain = new VBox(this.getSegment(), this.getPoint());
-        VBox bPont1 = new VBox(this.getAppuiSimple(), this.getAppuiDouble());
-        VBox bPont2 = new VBox(this.getNoeuds(), this.getBarres());
+        VBox bTreilli1 = new VBox(this.getAppuiSimple(), this.getAppuiDouble());
+        VBox bTreilli2 = new VBox(this.getNoeuds(), this.getBarres());
 
         VBox vOptions = new VBox(this.Nouveau, this.Ouvrir, this.getEnregistrer());
 
         HBox hTerrain = new HBox(this.getTerrain(), bTerrain);
-        HBox hPont = new HBox(this.getPont(), bPont1, bPont2);
+        HBox hTreilli = new HBox(this.getTreilli(), bTreilli1, bTreilli2);
 
         hTerrain.setSpacing(8);
-        hPont.setSpacing(8);
+        hTreilli.setSpacing(8);
 
         //partie déco (logo INSA)
-        Rectangle rectangle0 = new Rectangle();
-        rectangle0.setWidth(100);
-        rectangle0.setHeight(3);
-        rectangle0.setFill(Color.LIGHTSEAGREEN);
-        VBox LogoUsername = new VBox(iconINSA, rectangle0, this.UTextLabel);
-        LogoUsername.setSpacing(10);
-        LogoUsername.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
         NormeForce.setTextFill(Color.WHITE);
         ContraintesBarres.setTextFill(Color.WHITE);
         AngleForce.setTextFill(Color.WHITE);
-        Cout.setTextFill(Color.WHITE);
-        NomCout.setTextFill(Color.WHITE);
         Type.setTextFill(Color.WHITE);
-        SymboleEuro.setTextFill(Color.WHITE);
 
         // Défini les rectangles de séparation entre les groupes de boutons
         Rectangle rectangle1 = new Rectangle();
         rectangle1.setWidth(5);
         rectangle1.setHeight(100);
-        rectangle1.setFill(Color.LIGHTSEAGREEN);
+        rectangle1.setFill(Color.LIGHTGRAY);
 
         Rectangle rectangle2 = new Rectangle();
         rectangle2.setWidth(5);
         rectangle2.setHeight(100);
-        rectangle2.setFill(Color.LIGHTSEAGREEN);
+        rectangle2.setFill(Color.LIGHTGRAY);
 
         Rectangle rectangle3 = new Rectangle();
         rectangle3.setWidth(5);
         rectangle3.setHeight(100);
-        rectangle3.setFill(Color.LIGHTSEAGREEN);
+        rectangle3.setFill(Color.LIGHTGRAY);
 
         // Gère les groupes des différents boutons en définissant des couleurs de fond pour les H/VBox
         VBox NormeAngle = new VBox(Norme, Angle);
@@ -258,7 +217,7 @@ public class GlobalPane extends BorderPane {
         HBox SimFor = new HBox(Simulation, vbForce);
         SimFor.setSpacing(8);
 
-        HBox entete = new HBox(vOptions, rectangle1, hTerrain, rectangle2, hPont, rectangle3, SimFor);
+        HBox entete = new HBox(vOptions, rectangle1, hTerrain, rectangle2, hTreilli, rectangle3, SimFor);
         entete.setSpacing(20);
         entete.setPadding(new javafx.geometry.Insets(15, 20, 10, 10));
 
@@ -266,16 +225,13 @@ public class GlobalPane extends BorderPane {
         this.menu = new MainMenu(this);
         VBox barreMenus = new VBox(menu, entete);
 
-        Background bgBlue = new Background(new BackgroundFill(Color.CADETBLUE, CornerRadii.EMPTY, null));
+        Background bgBlue = new Background(new BackgroundFill(Color.LIGHTYELLOW, CornerRadii.EMPTY, null));
         barreMenus.setBackground(bgBlue);
 
         BorderPane haut = new BorderPane();
-        HBox logoINSA = new HBox(LogoUsername);
-        logoINSA.setBackground(bgBlue);
         HBox JeSersARien = new HBox();
         JeSersARien.setBackground(bgBlue);
         haut.setLeft(entete);
-        haut.setRight(logoINSA);
         haut.setTop(menu);
         haut.setCenter(JeSersARien);
         entete.setBackground(bgBlue);
@@ -305,10 +261,10 @@ public class GlobalPane extends BorderPane {
         this.Positions.setFont(javafx.scene.text.Font.font(15));
 
         VBox coteGauche = new VBox(hStyle, getCouleur(),
-                hPositions, this.Vertical, this.Horizontal, this.Sélectionner, Supprimer);
+                hPositions, this.Sélectionner, Supprimer);
         coteGauche.setPadding(new javafx.geometry.Insets(2, 15, 10, 10));
 
-        Background bgLightBlue = new Background(new BackgroundFill(Color.LIGHTSEAGREEN, CornerRadii.EMPTY, null));
+        Background bgLightBlue = new Background(new BackgroundFill(Color.LIGHTYELLOW, CornerRadii.EMPTY, null));
         coteGauche.setBackground(bgLightBlue);
 
         // Permet d'afficher les coordonnées du pointeurs en direct lorsqu'on bouge la souris sur le Canvas
@@ -324,9 +280,7 @@ public class GlobalPane extends BorderPane {
         });
 
         VBox posCurseur = new VBox(posX, posY);
-
-        HBox FormatPrix = new HBox(NomCout, Cout, SymboleEuro);
-        VBox IndicationElement = new VBox(Type, NormeForce, AngleForce, ContraintesBarres, FormatPrix);
+        VBox IndicationElement = new VBox(Type, NormeForce, AngleForce, ContraintesBarres);
         VBox Assemblage = new VBox(IndicationElement, posCurseur);
         VBox JeSersARienBis = new VBox();
 
@@ -340,11 +294,11 @@ public class GlobalPane extends BorderPane {
         this.setLeft(gauche);
 
 //----------- Concerne les éléments de la partie inférieure de l'interface -----------//
-        Aide.setText("Cliquez sur un bouton pour modéliser votre pont");
+        Aide.setText("Cliquez sur un bouton pour modéliser votre treilli");
 
         HBox coteBas = new HBox(this.Aide);
 
-        Background bgLightBlue2 = new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, null));
+        Background bgLightBlue2 = new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, null));
         coteBas.setBackground(bgLightBlue2);
 
         this.setBottom(coteBas);
@@ -368,18 +322,16 @@ public class GlobalPane extends BorderPane {
         Segment.setToggleGroup(gPointSegment);
         Point.setToggleGroup(gPointSegment);
 
-        ToggleGroup gTerrainPont = new ToggleGroup();
-        Terrain.setToggleGroup(gTerrainPont);
-        Pont.setToggleGroup(gTerrainPont);
-        Sélectionner.setToggleGroup(gTerrainPont);
-        Vertical.setToggleGroup(gTerrainPont);
-        Horizontal.setToggleGroup(gTerrainPont);
+        ToggleGroup gTerrainTreilli = new ToggleGroup();
+        Terrain.setToggleGroup(gTerrainTreilli);
+        Treilli.setToggleGroup(gTerrainTreilli);
+        Sélectionner.setToggleGroup(gTerrainTreilli);
 
-        ToggleGroup gPont = new ToggleGroup();
-        Noeuds.setToggleGroup(gPont);
-        Barres.setToggleGroup(gPont);
-        AppuiSimple.setToggleGroup(gPont);
-        AppuiDouble.setToggleGroup(gPont);
+        ToggleGroup gTreilli = new ToggleGroup();
+        Noeuds.setToggleGroup(gTreilli);
+        Barres.setToggleGroup(gTreilli);
+        AppuiSimple.setToggleGroup(gTreilli);
+        AppuiDouble.setToggleGroup(gTreilli);
 
 //----------- Concerne les instructions attendues lorsqu'on clique sur Point -----------//
         Point.setOnAction((t) -> {
@@ -393,23 +345,19 @@ public class GlobalPane extends BorderPane {
 
             // Quand Point est activé, on désactive tous les autres boutons
             if (Segment.isDisabled() == true) {
-                Pont.setDisable(false);
+                Treilli.setDisable(false);
                 Terrain.setDisable(false);
                 Force.setDisable(false);
                 Simulation.setDisable(false);
                 Segment.setDisable(false);
                 Sélectionner.setDisable(false);
-                Vertical.setDisable(false);
-                Horizontal.setDisable(false);
             } else {
-                Pont.setDisable(true);
+                Treilli.setDisable(true);
                 Terrain.setDisable(true);
                 Force.setDisable(true);
                 Simulation.setDisable(true);
                 Segment.setDisable(true);
                 Sélectionner.setDisable(true);
-                Vertical.setDisable(true);
-                Horizontal.setDisable(true);
             }
         });
 
@@ -425,22 +373,18 @@ public class GlobalPane extends BorderPane {
             // Quand Segment est activé, on désactive tous les autres boutons
             if (Point.isDisabled() == true) {
                 Point.setDisable(false);
-                Pont.setDisable(false);
+                Treilli.setDisable(false);
                 Terrain.setDisable(false);
                 Force.setDisable(false);
                 Simulation.setDisable(false);
                 Sélectionner.setDisable(false);
-                Vertical.setDisable(false);
-                Horizontal.setDisable(false);
             } else {
                 Point.setDisable(true);
-                Pont.setDisable(true);
+                Treilli.setDisable(true);
                 Terrain.setDisable(true);
                 Force.setDisable(true);
                 Simulation.setDisable(true);
                 Sélectionner.setDisable(true);
-                Vertical.setDisable(true);
-                Horizontal.setDisable(true);
             }
         });
 
@@ -455,7 +399,7 @@ public class GlobalPane extends BorderPane {
 
             // Quand Appui Simple est activé, on désactive tous les autres boutons
             if (Barres.isDisabled() == true) {
-                Pont.setDisable(false);
+                Treilli.setDisable(false);
                 Terrain.setDisable(false);
                 Simulation.setDisable(false);
                 Force.setDisable(false);
@@ -463,10 +407,8 @@ public class GlobalPane extends BorderPane {
                 AppuiDouble.setDisable(false);
                 Noeuds.setDisable(false);
                 Sélectionner.setDisable(false);
-                Vertical.setDisable(false);
-                Horizontal.setDisable(false);
             } else {
-                Pont.setDisable(true);
+                Treilli.setDisable(true);
                 Terrain.setDisable(true);
                 Simulation.setDisable(true);
                 Force.setDisable(true);
@@ -474,8 +416,6 @@ public class GlobalPane extends BorderPane {
                 AppuiDouble.setDisable(true);
                 Noeuds.setDisable(true);
                 Sélectionner.setDisable(true);
-                Vertical.setDisable(true);
-                Horizontal.setDisable(true);
             }
         });
 
@@ -490,7 +430,7 @@ public class GlobalPane extends BorderPane {
 
             // Quand Appui Double est activé, on désactive tous les autres boutons
             if (Barres.isDisabled() == true) {
-                Pont.setDisable(false);
+                Treilli.setDisable(false);
                 Terrain.setDisable(false);
                 Simulation.setDisable(false);
                 Force.setDisable(false);
@@ -498,10 +438,8 @@ public class GlobalPane extends BorderPane {
                 AppuiSimple.setDisable(false);
                 Noeuds.setDisable(false);
                 Sélectionner.setDisable(false);
-                Vertical.setDisable(false);
-                Horizontal.setDisable(false);
             } else {
-                Pont.setDisable(true);
+                Treilli.setDisable(true);
                 Terrain.setDisable(true);
                 Simulation.setDisable(true);
                 Force.setDisable(true);
@@ -509,8 +447,6 @@ public class GlobalPane extends BorderPane {
                 AppuiSimple.setDisable(true);
                 Noeuds.setDisable(true);
                 Sélectionner.setDisable(true);
-                Vertical.setDisable(true);
-                Horizontal.setDisable(true);
             }
         });
 
@@ -525,7 +461,7 @@ public class GlobalPane extends BorderPane {
 
             // Quand Appui Double est activé, on désactive tous les autres boutons
             if (Noeuds.isDisabled() == true) {
-                Pont.setDisable(false);
+                Treilli.setDisable(false);
                 Terrain.setDisable(false);
                 Simulation.setDisable(false);
                 Force.setDisable(false);
@@ -533,10 +469,8 @@ public class GlobalPane extends BorderPane {
                 AppuiSimple.setDisable(false);
                 Noeuds.setDisable(false);
                 Sélectionner.setDisable(false);
-                Vertical.setDisable(false);
-                Horizontal.setDisable(false);
             } else {
-                Pont.setDisable(true);
+                Treilli.setDisable(true);
                 Terrain.setDisable(true);
                 Simulation.setDisable(true);
                 Force.setDisable(true);
@@ -544,8 +478,6 @@ public class GlobalPane extends BorderPane {
                 AppuiSimple.setDisable(true);
                 Noeuds.setDisable(true);
                 Sélectionner.setDisable(true);
-                Vertical.setDisable(true);
-                Horizontal.setDisable(true);
             }
         });
 
@@ -560,7 +492,7 @@ public class GlobalPane extends BorderPane {
 
             // Quand Noeuds est activé, on désactive tous les autres boutons
             if (Barres.isDisabled() == true) {
-                Pont.setDisable(false);
+                Treilli.setDisable(false);
                 Terrain.setDisable(false);
                 Simulation.setDisable(false);
                 Force.setDisable(false);
@@ -568,10 +500,8 @@ public class GlobalPane extends BorderPane {
                 AppuiSimple.setDisable(false);
                 AppuiDouble.setDisable(false);
                 Sélectionner.setDisable(false);
-                Vertical.setDisable(false);
-                Horizontal.setDisable(false);
             } else {
-                Pont.setDisable(true);
+                Treilli.setDisable(true);
                 Terrain.setDisable(true);
                 Simulation.setDisable(true);
                 Force.setDisable(true);
@@ -579,8 +509,6 @@ public class GlobalPane extends BorderPane {
                 AppuiSimple.setDisable(true);
                 AppuiDouble.setDisable(true);
                 Sélectionner.setDisable(true);
-                Vertical.setDisable(true);
-                Horizontal.setDisable(true);
             }
         });
 
@@ -596,23 +524,23 @@ public class GlobalPane extends BorderPane {
             if (Segment.isDisabled() == true) {
                 Segment.setDisable(false);
                 Point.setDisable(false);
-                Pont.setDisable(true);
+                Treilli.setDisable(true);
                 Simulation.setDisable(true);
             } else {
                 Segment.setDisable(true);
                 Point.setDisable(true);
-                Pont.setDisable(false);
+                Treilli.setDisable(false);
                 Simulation.setDisable(false);
             }
         });
 
-//----------- Concerne les instructions attendues lorsqu'on clique sur Pont -----------//
-        Pont.setOnAction((t) -> {
-            Aide.setText("Cliquez sur le bouton Noeuds, Appui (Simple/Double) ou Barres pour modéliser votre pont");
+//----------- Concerne les instructions attendues lorsqu'on clique sur Treilli -----------//
+        Treilli.setOnAction((t) -> {
+            Aide.setText("Cliquez sur le bouton Noeuds, Appui (Simple/Double) ou Barres pour modéliser votre treilli");
             Point.setDisable(true);
             Segment.setDisable(true);
 
-            // Quand Pont est activé, on active Appui Simple, Appui Double, Noeuds et Barres et on désactive tous les autres boutons
+            // Quand Treilli est activé, on active Appui Simple, Appui Double, Noeuds et Barres et on désactive tous les autres boutons
             if (Barres.isDisabled() == true) {
                 Barres.setDisable(false);
                 AppuiSimple.setDisable(false);
@@ -663,51 +591,11 @@ public class GlobalPane extends BorderPane {
                 Norme.setDisable(false);
                 Valider.setDisable(false);
                 Sélectionner.setDisable(true);
-                Vertical.setDisable(true);
-                Horizontal.setDisable(true);
             } else {
                 Angle.setDisable(true);
                 Norme.setDisable(true);
                 Valider.setDisable(true);
                 Sélectionner.setDisable(false);
-                Vertical.setDisable(false);
-                Horizontal.setDisable(false);
-            }
-        });
-
-//----------- Concerne les instructions attendues lorsqu'on clique sur Vertical -----------//  
-        Vertical.setOnAction((t) -> {
-            controleur.boutonVertical(t);
-
-            // On désactive tous les boutons lorsqu'on clique sur Vertical
-            if (Segment.isDisabled() == false || Barres.isDisabled() == false || Angle.isDisabled() == false) {
-                Segment.setDisable(true);
-                Point.setDisable(true);
-                AppuiSimple.setDisable(true);
-                AppuiDouble.setDisable(true);
-                Barres.setDisable(true);
-                Noeuds.setDisable(true);
-                Angle.setDisable(true);
-                Norme.setDisable(true);
-                Valider.setDisable(true);
-            }
-        });
-
-//----------- Concerne les instructions attendues lorsqu'on clique sur Horizontal -----------//  
-        Horizontal.setOnAction((t) -> {
-            controleur.boutonHorizontal(t);
-
-            // On désactive tous les boutons lorsqu'on clique sur Horizontal
-            if (Segment.isDisabled() == false || Barres.isDisabled() == false || Angle.isDisabled() == false) {
-                Segment.setDisable(true);
-                Point.setDisable(true);
-                AppuiSimple.setDisable(true);
-                AppuiDouble.setDisable(true);
-                Barres.setDisable(true);
-                Noeuds.setDisable(true);
-                Angle.setDisable(true);
-                Norme.setDisable(true);
-                Valider.setDisable(true);
             }
         });
 
@@ -926,8 +814,8 @@ public class GlobalPane extends BorderPane {
         return Point;
     }
 
-    public ToggleButton getPont() {
-        return Pont;
+    public ToggleButton getTreilli() {
+        return Treilli;
     }
 
     public ToggleButton getAppuiSimple() {
@@ -1004,14 +892,6 @@ public class GlobalPane extends BorderPane {
 
     public void setContraintesBarres(String S) {
         this.ContraintesBarres.setText(S);
-    }
-
-    public String getCout() {
-        return Cout.getText();
-    }
-
-    public void setCout(String S) {
-        Cout.setText(S);
     }
 
     public String getUText() {

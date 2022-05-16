@@ -202,11 +202,4 @@ public class Barre extends Figure {
     public void setId(int Id) {
         this.Id = Id;
     }
-
-    public double getCout() {
-        double C = 0;
-        double dist = Noeuds_Barre[0].getDistance(Noeuds_Barre[1].getPos()); //Là on obtient la longeur de la barre
-        C = dist * Type_de_Barre.getCout() + ((int) dist) * Type_de_Barre.getCout_Supplementaire();
-        return C;
-    }
 }

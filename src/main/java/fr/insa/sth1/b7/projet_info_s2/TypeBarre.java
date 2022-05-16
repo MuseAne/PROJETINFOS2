@@ -8,10 +8,8 @@ public class TypeBarre {
     private String Section;
     private double Lmin;
     private double Lmax;
-    private double Cout;
     private double RmC;
     private double RmT;
-    private double Cout_Supplementaire;
     private String Materiaux;
     private ArrayList<Barre> Barre_TypeBarre;
 
@@ -20,18 +18,15 @@ public class TypeBarre {
         Section = "Rond";
         Lmin = 3;
         Lmax = 4;
-        Cout = 200;
         RmC = -100;
         RmT = 50;
         Materiaux = "Fer";
         Barre_TypeBarre = new ArrayList<>();
-        Cout_Supplementaire = 1500;
     }
 
     public TypeBarre(int Iden, String S, double C, double ResiMC, double ResiMT, String Mat) { //On s'en fout de ce qu'il y a dedans c'est juste pour dire qu'il y a un truc quoi
         Id = Iden;
         Section = S;
-        Cout = C;
         RmC = ResiMC;
         RmT = ResiMT;
         Materiaux = Mat;
@@ -41,12 +36,10 @@ public class TypeBarre {
     public TypeBarre(int Iden, String S, double C, double ResiMC, double ResiMT, String Mat, double Cout_Sup) { //On s'en fout de ce qu'il y a dedans c'est juste pour dire qu'il y a un truc quoi
         Id = Iden;
         Section = S;
-        Cout = C;
         RmC = ResiMC;
         RmT = ResiMT;
         Materiaux = Mat;
         Barre_TypeBarre = new ArrayList<>();
-        Cout_Supplementaire = Cout_Sup;
     }
 
     public String getSection() {
@@ -61,20 +54,12 @@ public class TypeBarre {
         return Lmax;
     }
 
-    public double getCout() {
-        return Cout;
-    }
-
     public double getRmC() {
         return RmC;
     }
 
     public double getRmT() {
         return RmT;
-    }
-
-    public double getCout_Supplementaire() {
-        return Cout_Supplementaire;
     }
 
     public String getMateriaux() {
@@ -92,7 +77,7 @@ public class TypeBarre {
     public String toString() {
         String res;
         res = "\n --Type Barre " + getId() + "--" + "\n- Section : " + Section + "\n- Longueur min : " + Lmin + "\n- Longueur max : " + Lmax + "\n- Resistance à la compression : " + RmC
-                + "\n- Resistance à la torsion : " + RmT + "\n- Materiau : " + Materiaux + "\n-Cout Supllementaire Au mètre : " + Cout_Supplementaire;
+                + "\n- Resistance à la torsion : " + RmT + "\n- Materiau : " + Materiaux;
         res = res + "\nLes barres suivantes sont de ce type : ";
 
         return res;
@@ -104,7 +89,7 @@ public class TypeBarre {
 
     public String Enregistrement() {
         String S;
-        S = "TypeBarre ; " + this.getId() + " ; " + this.getSection() + " ; " + this.getCout() + " ; " + this.getRmC() + " ; " + this.getRmT() + " ; " + this.getMateriaux() + " ; " + this.getCout_Supplementaire() + "\n";
+        S = "TypeBarre ; " + this.getId() + " ; " + this.getSection() + " ; " + this.getRmC() + " ; " + this.getRmT() + " ; " + this.getMateriaux() + "\n";
         return S;
     }
 }

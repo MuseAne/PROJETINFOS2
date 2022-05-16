@@ -323,7 +323,6 @@ public class ClassDessin { //Cette classe porte en fait mal son nom, de base, el
             for (Barre B : AB) {
                 bw.append(B.Enregistrement());
             }
-            bw.append("Cout ; " + GP.getCout() + "\n");
             bw.write("FIN");
             bw.close();
         }
